@@ -47,16 +47,20 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
+      },
+      backgroundImage: {
+        'hero-gradient': 'var(--hero-gradient)',
+        'card-gradient': 'var(--card-gradient)',
+        'skill-gradient': 'var(--skill-gradient)',
+      },
+      boxShadow: {
+        'soft': 'var(--shadow-soft)',
+        'hover': 'var(--shadow-hover)',
+        'glow': 'var(--shadow-glow)',
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+        'display': ['Inter', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
