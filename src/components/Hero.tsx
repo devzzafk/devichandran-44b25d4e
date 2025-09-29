@@ -1,6 +1,6 @@
 import { Code, Palette, BarChart3, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import profileImage from '@/assets/devi-profile.jpg';
+import profileImage from '@/assets/devi-profile-real.jpg';
 
 const Hero = () => {
   const skills = [
