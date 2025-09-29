@@ -49,17 +49,7 @@ const Projects = () => {
         {/* Featured Project - MindMates */}
         <div className="mb-16 slide-up">
           <Card className="project-card overflow-hidden bg-card-gradient border-0 shadow-soft hover:shadow-hover">
-            <div className="grid lg:grid-cols-2 gap-0">
-              <div className="relative overflow-hidden">
-                <img
-                  src={mindmatesImage}
-                  alt="MindMates Mental Health App"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
-              
-              <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
+            <CardContent className="p-8 lg:p-12">
                 <div className="mb-4">
                   <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
                     Featured Project
@@ -104,7 +94,6 @@ const Projects = () => {
                   </Button>
                 </div>
               </CardContent>
-            </div>
           </Card>
         </div>
 
