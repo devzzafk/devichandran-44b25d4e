@@ -1,11 +1,14 @@
-import { Code, Palette, BarChart3, Sparkles } from 'lucide-react';
+import { Code, Palette, BarChart3, Sparkles, Globe, Smartphone, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import profileImage from '@/assets/devi-profile-real.jpg';
 
 const Hero = () => {
   const skills = [
     { icon: Code, label: 'Python & JavaScript' },
-    { icon: Palette, label: 'UI/UX Design' },
+    { icon: Palette, label: 'Designing' },
+    { icon: Globe, label: 'Web Development' },
+    { icon: Smartphone, label: 'App Development' },
+    { icon: Edit, label: 'Content Creating' },
     { icon: BarChart3, label: 'Data Science' },
     { icon: Sparkles, label: 'Creative Coding' },
   ];
@@ -69,7 +72,7 @@ const Hero = () => {
             </div>
 
             {/* Skills Preview */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 pt-8">
               {skills.map((skill, index) => (
                 <div 
                   key={skill.label}
