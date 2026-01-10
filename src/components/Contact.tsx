@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +14,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const socialLinks = [
@@ -21,28 +22,28 @@ const Contact = () => {
       icon: Linkedin,
       label: 'LinkedIn',
       href: 'https://linkedin.com/in/devichandrans',
-      color: 'from-blue-600 to-blue-700',
+      gradient: 'from-[#0077B5] to-[#0066A2]',
       username: '@devichandrans'
     },
     {
       icon: Instagram,
       label: 'Instagram',
       href: 'https://instagram.com/euon.ialab',
-      color: 'from-pink-500 to-purple-600',
+      gradient: 'from-[#E4405F] to-[#C13584]',
       username: '@euon.ialab'
     },
     {
       icon: Youtube,
       label: 'YouTube',
       href: 'https://youtube.com/@EuoniaLab',
-      color: 'from-red-500 to-red-600',
+      gradient: 'from-[#FF0000] to-[#CC0000]',
       username: '@EuoniaLab'
     },
     {
       icon: Mail,
       label: 'Email',
       href: 'mailto:euonialab@gmail.com',
-      color: 'from-green-500 to-teal-600',
+      gradient: 'from-mint to-lavender',
       username: 'euonialab@gmail.com'
     }
   ];
@@ -50,7 +51,6 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Missing Information",
@@ -60,7 +60,6 @@ const Contact = () => {
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
@@ -71,35 +70,29 @@ const Contact = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      // Send email using EmailJS
       const result = await emailjs.send(
-        'service_jjivnoc', // Your service ID
-        'template_bqis2qo', // Your template ID
+        'service_jjivnoc',
+        'template_bqis2qo',
         {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject || 'New Contact Form Message',
           message: formData.message,
         },
-        'orXrVywM4hgvU3rbU' // Your public key
+        'orXrVywM4hgvU3rbU'
       );
 
       console.log('Email sent successfully:', result);
       
-      // Show success message
       toast({
-        title: "Message Sent!",
+        title: "Message Sent! ✨",
         description: "Thank you for reaching out. I'll get back to you soon!",
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
@@ -107,6 +100,8 @@ const Contact = () => {
         description: "Failed to send message. Please try again or contact me directly.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -118,17 +113,25 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-24 bg-muted/30 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-0 w-80 h-80 bg-baby-pink/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-card border border-border/50 mb-6">
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-muted-foreground">Let's connect</span>
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Get In{' '}
             <span className="bg-skill-gradient bg-clip-text text-transparent">
               Touch
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Let's connect! Whether you're interested in collaborating, learning, or just want to chat about tech and design.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Whether you're interested in collaborating, learning, or just want to chat about tech and design — I'd love to hear from you!
           </p>
         </div>
 
@@ -136,14 +139,16 @@ const Contact = () => {
           
           {/* Contact Form */}
           <div className="slide-up">
-            <Card className="p-8 bg-card-gradient border-0 shadow-soft">
+            <Card className="p-8 bg-card-gradient border-0 shadow-soft rounded-3xl">
               <CardContent className="p-0">
-                <div className="flex items-center mb-6">
-                  <MessageCircle className="w-6 h-6 text-primary mr-3" />
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 rounded-2xl bg-gradient-to-r from-lavender to-soft-blue">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
                   <h3 className="text-2xl font-semibold">Send a Message</h3>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -155,7 +160,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Your full name"
-                        className="bg-background border-border focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
                         required
                       />
                     </div>
@@ -170,7 +175,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="your.email@example.com"
-                        className="bg-background border-border focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
                         required
                       />
                     </div>
@@ -186,7 +191,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       placeholder="What's this about?"
-                      className="bg-background border-border focus:border-primary"
+                      className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
                     />
                   </div>
 
@@ -201,17 +206,18 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Tell me about your project, questions, or just say hello!"
                       rows={5}
-                      className="bg-background border-border focus:border-primary resize-none"
+                      className="bg-background/50 border-border/50 focus:border-primary resize-none rounded-xl"
                       required
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 rounded-lg font-semibold"
+                    disabled={isSubmitting}
+                    className="w-full btn-glow bg-skill-gradient hover:opacity-90 text-primary-foreground py-6 rounded-xl font-semibold text-base"
                   >
                     <Send className="w-4 h-4 mr-2" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>
@@ -221,33 +227,29 @@ const Contact = () => {
           {/* Contact Info & Social Links */}
           <div className="space-y-8 fade-in">
             
-            {/* Contact Info */}
-            <Card className="p-8 bg-card-gradient border-0 shadow-soft">
+            {/* Info Card */}
+            <Card className="p-8 bg-card-gradient border-0 shadow-soft rounded-3xl">
               <CardContent className="p-0">
-                <div className="flex items-center mb-6">
-                  <MapPin className="w-6 h-6 text-primary mr-3" />
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="p-3 rounded-2xl bg-gradient-to-r from-baby-pink to-lavender">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
                   <h3 className="text-2xl font-semibold">Let's Connect</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   I'm always excited to connect with fellow developers, students, and anyone passionate about technology. 
                   Feel free to reach out for collaborations, mentorship, or just a friendly chat!
                 </p>
-                <div className="space-y-3">
-                  <div className="flex items-center text-muted-foreground">
-                    <Mail className="w-4 h-4 mr-3 text-primary" />
-                    <span>euonialab@gmail.com</span>
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
-                    <MapPin className="w-4 h-4 mr-3 text-primary" />
-                    <span>Available for remote collaborations</span>
-                  </div>
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Mail className="w-5 h-5 text-primary" />
+                  <span className="font-medium">euonialab@gmail.com</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* Social Links */}
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Follow Me</h3>
+              <h3 className="text-2xl font-semibold mb-6">Follow Me ✨</h3>
               <div className="grid gap-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -258,10 +260,10 @@ const Contact = () => {
                     className="group"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <Card className="skill-card p-4 bg-card-gradient border-0 shadow-soft hover:shadow-hover transition-all duration-300">
+                    <Card className="skill-card p-4 bg-card-gradient border-0 shadow-soft hover:shadow-hover transition-all duration-300 rounded-2xl">
                       <CardContent className="p-0">
-                        <div className="flex items-center">
-                          <div className={`p-3 rounded-xl bg-gradient-to-r ${social.color} mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl bg-gradient-to-r ${social.gradient} group-hover:scale-110 transition-transform duration-300`}>
                             <social.icon className="w-5 h-5 text-white" />
                           </div>
                           <div>
