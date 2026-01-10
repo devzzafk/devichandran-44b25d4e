@@ -1,50 +1,27 @@
-import { Heart, Code, Sparkles } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-background border-t border-border py-12">
+    <footer className="bg-card border-t border-border/50 py-12">
       <div className="container mx-auto px-6">
-        <div className="text-center space-y-6">
-          
-          {/* Brand */}
-          <div>
-            <button 
-              onClick={scrollToTop}
-              className="text-3xl font-bold bg-skill-gradient bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-            >
-              Devi Chandran
-            </button>
-            <p className="text-muted-foreground mt-2 max-w-md mx-auto">
-              Aspiring engineer passionate about creating meaningful digital experiences through code and design.
-            </p>
-          </div>
-
-          {/* Decorative Elements */}
-          <div className="flex items-center justify-center space-x-4 py-6">
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <Code className="w-4 h-4" />
-              <span className="text-sm">Built with React</span>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-skill-gradient">
+              <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm">Designed with passion</span>
-            </div>
+            <span className="text-xl font-bold bg-skill-gradient bg-clip-text text-transparent">Devi Chandran</span>
           </div>
-
-          {/* Copyright */}
-          <div className="pt-6 border-t border-border">
-            <p className="text-muted-foreground text-sm flex items-center justify-center space-x-2">
-              <span>&copy; {currentYear} Devi Chandran. Made with</span>
-              <Heart className="w-4 h-4 text-primary fill-current" />
-              <span>and lots of coffee</span>
-            </p>
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
+            <span>© {currentYear} Made with</span>
+            <Heart className="w-4 h-4 text-baby-pink fill-current" />
+            <span>by Devi</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="#home" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</a>
+            <a href="#projects" className="text-sm text-muted-foreground hover:text-primary transition-colors">Projects</a>
+            <a href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
           </div>
         </div>
       </div>
