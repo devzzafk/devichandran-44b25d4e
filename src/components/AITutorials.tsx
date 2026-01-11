@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 const AITutorials = () => {
   const tutorials = [
     {
-      number: '1️⃣',
+      number: '01',
       title: 'AI for Web Development',
       subtitle: 'Learn how AI tools can help you design and build websites faster and smarter.',
       topics: [
@@ -16,7 +16,7 @@ const AITutorials = () => {
       gradient: 'from-lavender to-soft-blue'
     },
     {
-      number: '2️⃣',
+      number: '02',
       title: 'AI for App Development',
       subtitle: 'Use AI to accelerate your app-building process.',
       topics: [
@@ -25,10 +25,10 @@ const AITutorials = () => {
         'Integrating AI APIs for features like chatbots or recommendations'
       ],
       icon: Smartphone,
-      gradient: 'from-baby-pink to-lavender'
+      gradient: 'from-soft-blue to-mint'
     },
     {
-      number: '3️⃣',
+      number: '03',
       title: 'AI for Automation & Productivity',
       subtitle: 'Boost efficiency in coding and project management using AI.',
       topics: [
@@ -40,7 +40,7 @@ const AITutorials = () => {
       gradient: 'from-mint to-lavender'
     },
     {
-      number: '4️⃣',
+      number: '04',
       title: 'AI for Creative Projects',
       subtitle: 'Bring creativity and tech together using AI.',
       topics: [
@@ -49,13 +49,13 @@ const AITutorials = () => {
         'Creating interactive experiences faster'
       ],
       icon: Palette,
-      gradient: 'from-peach to-baby-pink'
+      gradient: 'from-lavender to-peach'
     }
   ];
 
   return (
     <section id="tutorials" className="py-24 bg-muted/30 relative overflow-hidden">
-      <div className="absolute top-20 right-0 w-80 h-80 bg-baby-pink/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 right-0 w-80 h-80 bg-soft-blue/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-6 relative z-10">
@@ -65,7 +65,6 @@ const AITutorials = () => {
             <span className="text-sm font-medium text-muted-foreground">Learn with AI</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-4xl mr-2">🤖</span>
             AI-Powered{' '}
             <span className="bg-skill-gradient bg-clip-text text-transparent">Tutorials</span>
           </h2>
@@ -78,12 +77,12 @@ const AITutorials = () => {
           {tutorials.map((tutorial, index) => (
             <Card 
               key={tutorial.title}
-              className="project-card group p-8 bg-card-gradient border-0 shadow-soft hover:shadow-hover rounded-3xl"
+              className="project-card group p-8 bg-card-gradient border-0 shadow-soft hover:shadow-hover rounded-3xl transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-0">
                 <div className="flex items-start gap-4 mb-5">
-                  <span className="text-3xl">{tutorial.number}</span>
+                  <span className="text-2xl font-bold text-muted-foreground/50">{tutorial.number}</span>
                   <div className={`p-3 rounded-2xl bg-gradient-to-r ${tutorial.gradient} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                     <tutorial.icon className="w-6 h-6 text-white" />
                   </div>
@@ -100,7 +99,7 @@ const AITutorials = () => {
                 <div className="bg-muted/30 rounded-2xl p-5">
                   <p className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-primary" />
-                    Topics Covered:
+                    Topics Covered
                   </p>
                   <ul className="space-y-2">
                     {tutorial.topics.map((topic, idx) => (

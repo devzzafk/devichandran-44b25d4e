@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle, Sparkles } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,9 +35,9 @@ const Contact = () => {
     {
       icon: Youtube,
       label: 'YouTube',
-      href: 'https://youtube.com/@EuoniaLab',
+      href: 'https://www.youtube.com/@from.haneul',
       gradient: 'from-[#FF0000] to-[#CC0000]',
-      username: '@EuoniaLab'
+      username: '@from.haneul'
     },
     {
       icon: Mail,
@@ -88,8 +88,8 @@ const Contact = () => {
       console.log('Email sent successfully:', result);
       
       toast({
-        title: "Message Sent! ✨",
-        description: "Thank you for reaching out. I'll get back to you soon!",
+        title: "Message Sent",
+        description: "Thank you for reaching out. I'll get back to you soon.",
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -113,17 +113,13 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-muted/30 relative overflow-hidden">
+    <section id="contact" className="py-24 bg-background relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-20 right-0 w-80 h-80 bg-baby-pink/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 right-0 w-80 h-80 bg-soft-blue/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-card border border-border/50 mb-6">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">Let's connect</span>
-          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Get In{' '}
             <span className="bg-skill-gradient bg-clip-text text-transparent">
@@ -131,7 +127,7 @@ const Contact = () => {
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Whether you're interested in collaborating, learning, or just want to chat about tech and design — I'd love to hear from you!
+            Interested in collaborating or have a question? I'd be happy to hear from you.
           </p>
         </div>
 
@@ -204,7 +200,7 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Tell me about your project, questions, or just say hello!"
+                      placeholder="Your message..."
                       rows={5}
                       className="bg-background/50 border-border/50 focus:border-primary resize-none rounded-xl"
                       required
@@ -224,32 +220,10 @@ const Contact = () => {
             </Card>
           </div>
 
-          {/* Contact Info & Social Links */}
+          {/* Social Links */}
           <div className="space-y-8 fade-in">
-            
-            {/* Info Card */}
-            <Card className="p-8 bg-card-gradient border-0 shadow-soft rounded-3xl">
-              <CardContent className="p-0">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="p-3 rounded-2xl bg-gradient-to-r from-baby-pink to-lavender">
-                    <Mail className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-semibold">Let's Connect</h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  I'm always excited to connect with fellow developers, students, and anyone passionate about technology. 
-                  Feel free to reach out for collaborations, mentorship, or just a friendly chat!
-                </p>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Mail className="w-5 h-5 text-primary" />
-                  <span className="font-medium">euonialab@gmail.com</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Social Links */}
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Follow Me ✨</h3>
+              <h3 className="text-2xl font-semibold mb-6">Connect</h3>
               <div className="grid gap-4">
                 {socialLinks.map((social, index) => (
                   <a
