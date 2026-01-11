@@ -47,28 +47,32 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom soft colors
+        // Custom playful colors
         lavender: "hsl(var(--lavender))",
         mint: "hsl(var(--mint))",
         peach: "hsl(var(--peach))",
         "baby-pink": "hsl(var(--baby-pink))",
         "soft-blue": "hsl(var(--soft-blue))",
+        cream: "hsl(var(--cream))",
+        lilac: "hsl(var(--lilac))",
       },
       backgroundImage: {
         'hero-gradient': 'var(--hero-gradient)',
         'card-gradient': 'var(--card-gradient)',
         'skill-gradient': 'var(--skill-gradient)',
         'accent-gradient': 'var(--accent-gradient)',
+        'fun-gradient': 'var(--fun-gradient)',
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',
         'hover': 'var(--shadow-hover)',
         'glow': 'var(--shadow-glow)',
         'card': 'var(--shadow-card)',
+        'cute': 'var(--shadow-cute)',
       },
       fontFamily: {
-        'inter': ['Inter', 'sans-serif'],
-        'display': ['Inter', 'sans-serif'],
+        'display': ['Quicksand', 'sans-serif'],
+        'body': ['Nunito', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,6 +80,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
         "2xl": "1.5rem",
         "3xl": "2rem",
+        "4xl": "2.5rem",
       },
       keyframes: {
         "accordion-down": {
@@ -86,10 +91,20 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "wiggle": {
+          "0%, 100%": { transform: "rotate(-2deg)" },
+          "50%": { transform: "rotate(2deg)" },
+        },
+        "bounce-gentle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "wiggle": "wiggle 1s ease-in-out infinite",
+        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
       },
     },
   },
