@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Youtube, Send, MessageCircle, Heart, Sparkles, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -16,6 +17,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { playPop, playClick } = useSoundEffects();
 
   const socialLinks = [
     {
@@ -43,13 +45,14 @@ const Contact = () => {
       icon: Mail,
       label: 'Email',
       href: 'mailto:euonialab@gmail.com',
-      gradient: 'from-mint to-lavender',
+      gradient: 'from-mint to-soft-blue',
       username: 'euonialab@gmail.com'
     }
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    playClick();
     
     if (!formData.name || !formData.email || !formData.message) {
       toast({
@@ -86,10 +89,11 @@ const Contact = () => {
       );
 
       console.log('Email sent successfully:', result);
+      playPop();
       
       toast({
-        title: "Message Sent",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you soon!",
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -115,19 +119,25 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-background relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-20 right-0 w-80 h-80 bg-soft-blue/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 right-0 w-80 h-80 bg-baby-pink/15 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-lavender/12 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-mint/10 rounded-full blur-3xl float-delayed" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 fade-in">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-card border border-border/40 mb-6 wiggle">
+            <Heart className="w-4 h-4 text-baby-pink fill-baby-pink" />
+            <span className="text-sm font-semibold text-muted-foreground">Let's connect</span>
+            <Star className="w-4 h-4 text-peach fill-peach" />
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold font-display mb-6">
             Get In{' '}
-            <span className="bg-skill-gradient bg-clip-text text-transparent">
+            <span className="rainbow-text">
               Touch
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Interested in collaborating or have a question? I'd be happy to hear from you.
+            Interested in collaborating or have a question? I'd love to hear from you!
           </p>
         </div>
 
@@ -135,19 +145,19 @@ const Contact = () => {
           
           {/* Contact Form */}
           <div className="slide-up">
-            <Card className="p-8 bg-card-gradient border-0 shadow-soft rounded-3xl">
+            <Card className="p-8 bg-card-gradient border-0 shadow-cute rounded-3xl">
               <CardContent className="p-0">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-2xl bg-gradient-to-r from-lavender to-soft-blue">
+                  <div className="p-3 rounded-2xl bg-gradient-to-r from-lavender to-lilac">
                     <MessageCircle className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-2xl font-semibold">Send a Message</h3>
+                  <h3 className="text-2xl font-bold font-display">Send a Message</h3>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      <label htmlFor="name" className="block text-sm font-semibold mb-2">
                         Name *
                       </label>
                       <Input
@@ -155,13 +165,13 @@ const Contact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Your full name"
-                        className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
+                        placeholder="Your name"
+                        className="bg-background/50 border-border/50 focus:border-primary rounded-2xl h-12 font-medium"
                         required
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      <label htmlFor="email" className="block text-sm font-semibold mb-2">
                         Email *
                       </label>
                       <Input
@@ -170,15 +180,15 @@ const Contact = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="your.email@example.com"
-                        className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
+                        placeholder="your@email.com"
+                        className="bg-background/50 border-border/50 focus:border-primary rounded-2xl h-12 font-medium"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                    <label htmlFor="subject" className="block text-sm font-semibold mb-2">
                       Subject
                     </label>
                     <Input
@@ -187,12 +197,12 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       placeholder="What's this about?"
-                      className="bg-background/50 border-border/50 focus:border-primary rounded-xl h-12"
+                      className="bg-background/50 border-border/50 focus:border-primary rounded-2xl h-12 font-medium"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    <label htmlFor="message" className="block text-sm font-semibold mb-2">
                       Message *
                     </label>
                     <Textarea
@@ -202,7 +212,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Your message..."
                       rows={5}
-                      className="bg-background/50 border-border/50 focus:border-primary resize-none rounded-xl"
+                      className="bg-background/50 border-border/50 focus:border-primary resize-none rounded-2xl font-medium"
                       required
                     />
                   </div>
@@ -210,10 +220,11 @@ const Contact = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full btn-glow bg-skill-gradient hover:opacity-90 text-primary-foreground py-6 rounded-xl font-semibold text-base"
+                    className="w-full btn-cute bg-skill-gradient hover:opacity-90 text-primary-foreground py-6 rounded-2xl font-bold text-base shadow-cute"
                   >
                     <Send className="w-4 h-4 mr-2" />
                     {isSubmitting ? 'Sending...' : 'Send Message'}
+                    <Sparkles className="w-4 h-4 ml-2" />
                   </Button>
                 </form>
               </CardContent>
@@ -223,7 +234,10 @@ const Contact = () => {
           {/* Social Links */}
           <div className="space-y-8 fade-in">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Connect</h3>
+              <h3 className="text-2xl font-bold font-display mb-6 flex items-center gap-2">
+                Connect
+                <Heart className="w-5 h-5 text-baby-pink fill-baby-pink" />
+              </h3>
               <div className="grid gap-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -232,16 +246,17 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group"
+                    onClick={() => playClick()}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <Card className="skill-card p-4 bg-card-gradient border-0 shadow-soft hover:shadow-hover transition-all duration-300 rounded-2xl">
+                    <Card className="skill-card p-4 bg-card-gradient border-0 shadow-card hover:shadow-cute transition-all duration-300 rounded-2xl">
                       <CardContent className="p-0">
                         <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-xl bg-gradient-to-r ${social.gradient} group-hover:scale-110 transition-transform duration-300`}>
+                          <div className={`p-3 rounded-2xl bg-gradient-to-r ${social.gradient} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm`}>
                             <social.icon className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <h4 className="font-semibold text-card-foreground group-hover:text-primary transition-colors">
+                            <h4 className="font-bold text-card-foreground group-hover:text-primary transition-colors">
                               {social.label}
                             </h4>
                             <p className="text-sm text-muted-foreground">
